@@ -1,0 +1,271 @@
+---
+  title: "Laboration 1"
+author: "Förnamn Efternamn"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+  fig_caption: yes
+---
+# Uppgift 2
+
+I denna del kommer vi undersöka ett antal grafiska framställningar ur tre fördelningar. Dessa är normalfördelningen, den likformiga fördelningen samt exponentialfördelningen.För varje fördelning har vi ett stickprov och vi ska avgöra vid vilken  stickprovsstorlek som vi...
+
+```{r}
+
+#Definition av de olika stickproven
+
+a <- 8 
+
+n <- 10 # Antal stickprovspunkter
+
+# 5 stycken stickprov av storlek n, samtliga ur en normalfördelning.
+set.seed(19891008)
+x1 <- rnorm(n, a ,a)
+x2 <- rnorm(n, a, a)
+x3 <- rnorm(n, a, a)
+x4 <- rnorm(n, a, a)
+x5 <- rnorm(n, a, a)
+
+
+# 5 stycken stickprov av storlek n, samtliga ur en likformig fördelning.Observera att övre och undre gränser har modifierats efter resultatet i uppgift 1.
+set.seed(19891008)
+u1 <- runif(n, (1-3^(1/2)*a),(1+3^(1/2)*a))
+u2 <- runif(n, (1-3^(1/2)*a),(1+3^(1/2)*a))
+u3 <- runif(n, (1-3^(1/2)*a),(1+3^(1/2)*a))
+u4 <- runif(n, (1-3^(1/2)*a),(1+3^(1/2)*a))
+u5 <- runif(n, (1-3^(1/2)*a),(1+3^(1/2)*a))
+
+# 5 stycken stickprov av storlek n, samtliga ur en exponentialfördelning fördelning.
+set.seed(19891008)
+e1 <- rexp(n,1/a)
+e2 <- rexp(n,1/a)
+e3 <- rexp(n,1/a)
+e4 <- rexp(n,1/a)
+e5 <- rexp(n,1/a)
+```
+
+
+```{r}
+
+old_par <- par(mfrow = c(3, 5))
+#================================= Histogram över de normalfördelade stickproven
+hist(x1, prob = TRUE,
+  main="normalförd. 1 ",
+  ylab="Frekvens",
+  xlab="Stickprovsvärde")
+lines(x, dnorm(x,a,a))
+
+hist(x2,prob = TRUE,
+  main="normalförd. 2 ",
+  ylab="Frekvens",
+  xlab="Stickprovsvärde")
+lines(x, dnorm(x,a,a))
+
+hist(x3,prob = TRUE,
+  main="normalförd. 3 ",
+  ylab="Frekvens",
+  xlab="Stickprovsvärde")
+lines(x, dnorm(x,a,a))
+
+hist(x4, prob = TRUE,
+  main="normalförd. 4 ",
+  ylab="Frekvens",
+  xlab="Stickprovsvärde")
+lines(x, dnorm(x,a,a))
+
+hist(x5,prob = TRUE,
+  main="normalförd. 5 ",
+  ylab="Frekvens",
+  xlab="Stickprovsvärde")
+lines(x, dnorm(x,a,a))
+
+#================================= Histogram över de likformigt fördelade stickproven
+
+hist(u1, prob = TRUE,
+  main="Likform.förd. 1 ",
+  ylab="Frekvens",
+  xlab="Stickprovsvärde")
+lines(x, dnorm(x,a,a))
+
+hist(u2, prob = TRUE,
+  main="Likform.förd. 2 ",
+  ylab="Frekvens",
+  xlab="Stickprovsvärde")
+lines(x, dnorm(x,a,a))
+
+hist(u3, prob = TRUE,
+  main="Likform.förd. 3 ",
+  ylab="Frekvens",
+  xlab="Stickprovsvärde")
+lines(x, dnorm(x,a,a))
+
+hist(u4, prob = TRUE,
+  main="Likform.förd. 4 ",
+  ylab="Frekvens",
+  xlab="Stickprovsvärde")
+lines(x, dnorm(x,a,a))
+
+hist(u5, prob = TRUE,
+  main="Likform.förd. 5 ",
+  ylab="Frekvens",
+  xlab="Stickprovsvärde")
+lines(x, dnorm(x,a,a))
+
+
+#================================= Histogram över de exponentialförelade stickproven
+
+hist(e1, prob = TRUE,
+  main="exp.förd. 1 ",
+  ylab="Frekvens",
+  xlab="Stickprovsvärde")
+lines(x, dnorm(x,a,a))
+
+hist(e2, prob = TRUE,
+  main="exp.förd. 2 ",
+  ylab="Frekvens",
+  xlab="Stickprovsvärde")
+lines(x, dnorm(x,a,a))
+
+hist(e3, prob = TRUE,
+  main="exp.förd. 3 ",
+  ylab="Frekvens",
+  xlab="Stickprovsvärde")
+lines(x, dnorm(x,a,a))
+
+hist(e4, prob = TRUE,
+  main="exp.förd. 4 ",
+  ylab="Frekvens",
+  xlab="Stickprovsvärde")
+lines(x, dnorm(x,a,a))
+
+hist(e5, prob = TRUE,
+  main="exp.förd. 5 ",
+  ylab="Frekvens",
+  xlab="Stickprovsvärde")
+lines(x, dnorm(x,a,a))
+
+par(old_par)
+```
+
+```{r}
+old_par <- par(mfrow = c(1, 3))
+
+boxplot(x1, x2, x3, x4, x5,
+        main="Normalfördelade stickprov",
+        ylab="Stickprovsvärde")
+boxplot(u1, u2, u3, u4, u5,
+        main="Likformigt fördelade stickprov",
+        ylab="Stickprovsvärde")
+boxplot(e1, e2, e3, e4, e5,
+        main="Exponentialfördelade stickprov",
+        ylab="Stickprovsvärde")
+par(old_par)
+```
+
+
+
+```{r}
+old_par <- par(mfrow = c(3, 5))
+
+#================================================== Q-Q plot för de normalfördelade stickproven
+qqnorm(x1, 
+       main="Normal förd.1",
+      xlab="Sann kvantil",
+      ylab="Stickprovskvantil")
+qqline(x1)
+
+qqnorm(x2, 
+       main="Normal förd.2",
+      xlab="Sann kvantil",
+      ylab="Stickprovskvantil")
+qqline(x2)
+
+qqnorm(x3, 
+       main="Normal förd.3",
+      xlab="Sann kvantil",
+      ylab="Stickprovskvantil")
+qqline(x3)
+
+qqnorm(x4, 
+       main="Normal förd.4",
+      xlab="Sann kvantil",
+      ylab="Stickprovskvantil")
+qqline(x4)
+
+qqnorm(x1, 
+       main="Normal förd.5",
+      xlab="Sann kvantil",
+      ylab="Stickprovskvantil")
+qqline(x5)
+
+
+#================================================== Q-Q plot för de likformig fördelade stickproven
+qqnorm(u1, 
+       main="Likform.förd. 1",
+      xlab="Sann kvantil",
+      ylab="Stickprovskvantil")
+qqline(u1)
+
+qqnorm(u2, 
+       main="Likform.förd. 2",
+      xlab="Sann kvantil",
+      ylab="Stickprovskvantil")
+qqline(u2)
+
+qqnorm(u3, 
+       main="Likform.förd. 3",
+      xlab="Sann kvantil",
+      ylab="Stickprovskvantil")
+qqline(u3)
+
+qqnorm(u4, 
+       main="Likform.förd. 4",
+      xlab="Sann kvantil",
+      ylab="Stickprovskvantil")
+qqline(u4)
+
+qqnorm(u5, 
+       main="Likform.förd. 5",
+      xlab="Sann kvantil",
+      ylab="Stickprovskvantil")
+qqline(u5)
+
+#================================================== Q-Q plot för de exponentialfördelade stickproven
+
+qqnorm(e1, 
+       main="exp.förd. 1",
+      xlab="Sann kvantil",
+      ylab="Stickprovskvantil")
+qqline(e1)
+
+qqnorm(e2, 
+       main="exp.förd. 2",
+      xlab="Sann kvantil",
+      ylab="Stickprovskvantil")
+qqline(e2)
+
+qqnorm(e3, 
+       main="exp.förd. 3",
+      xlab="Sann kvantil",
+      ylab="Stickprovskvantil")
+qqline(e3)
+
+qqnorm(e4, 
+       main="exp.förd. 4",
+      xlab="Sann kvantil",
+      ylab="Stickprovskvantil")
+qqline(e4)
+
+qqnorm(e5, 
+       main="exp.förd. 5",
+      xlab="Sann kvantil",
+      ylab="Stickprovskvantil")
+qqline(e5)
+
+par(old_par)
+```
+
+
+
+
+
